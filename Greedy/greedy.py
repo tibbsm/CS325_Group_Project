@@ -4,7 +4,7 @@ from math import sqrt
 def d2(c1, c2):
 	return (c1['x'] - c2['x'])**2 + (c1['y'] - c2['y'])**2
 
-def getNN(cities, city):
+def get_nn(cities, city):
 
 	neighbors = {}
 
@@ -16,9 +16,9 @@ def getNN(cities, city):
 
 	return nn, d
 
-def greedy(cities):
+def TSP_nearest_neighbor(cities):
 	tour = []
-	dMin = []
+	dMin = sys.maxint
 
 	for first in cities:
 		total = 0
@@ -30,20 +30,18 @@ def greedy(cities):
 				unvisited.append(city)
 
 		while len(unvisited) > 0:
-			nn, d = getNN(unvisited, visited[-1])
+			nn, d = get_nn(unvisited, visited[-1])
 			visited.append(nn)
 			unvisited.remove(nn)
 			total += d	
 
 		total += int(round(sqrt(d2(visited[0], visited[-1]))))
 
-		if dMin is [] or total < dMin:
+		if total < dMin:
 			tour = visited
 			dMin = total
 
 	return tour, dMin
-
-
 
 def main():
 
@@ -63,7 +61,7 @@ def main():
 		city = {'id':int(spLine[0]), 'x':int(spLine[1]), 'y':int(spLine[2])}
 		cities.append(city)
 
-	tour, d = greedy(cities)
+	tour, d = TSP_nearest_neighbor(cities)
 	
 	outFile.write(str(d) + '\n')
 

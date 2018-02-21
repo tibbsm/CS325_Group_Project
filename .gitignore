@@ -1,0 +1,15 @@
+# apple
+.DS_Store
+
+# python
+*.pyc
+
+
+# latex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.log
+*.run.xml
