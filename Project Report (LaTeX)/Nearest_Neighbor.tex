@@ -5,20 +5,29 @@
 \part*{The Nearest Neighbor Algorithm}
 
 \section*{Algorithm Description}
-The nearest neighbour algorithm is a greedy algorithm that solves the traveling salesman problem by continually choosing the nearest unvisited city on his tour. True to its nature the algorithm works quickly and effectively. Given a randomly distributed number of cities this algorithm will yield a tour that is on average 25\% longer than the shortest possible path.[1] 
-\\[.25cm]
-However, there exist many specially arranged city distributions which make the NN algorithm give the worst route.[18] This is true for both asymmetric and symmetric TSPs.[19] Rosenkrantz et al.[20] showed that the NN algorithm has the approximation factor $\Theta (\log |V|)$ for instances satisfying the triangle inequality. 
-\\[.25cm]
-A variation of NN algorithm, called Nearest Fragment (NF) operator, which connects a group (fragment) of nearest unvisited cities, can find shorter route with successive iterations.[21] The NF operator can also be applied on an initial solution obtained by NN algorithm for further improvement in an elitist model, where only better solutions are accepted.
-\\[.25cm]
-[1] Johnson, D. S.; McGeoch, L. A. (1997). "The Traveling Salesman Problem: A Case Study in Local Optimization" (PDF). In Aarts, E. H. L.; Lenstra, J. K. Local Search in Combinatorial Optimisation. London: John Wiley and Sons Ltd. pp. 215–310.
+The nearest neighbor algorithm is a greedy algorithm that solves the traveling salesman problem by continually choosing the nearest unvisited city to the current city until all cities have been visited. True to its nature as a greedy algorithm, the algorithm runs quickly and effectively. When given randomly generated city data the greedy algorithm will return a solution that is 20-25\% longer than the optimal solution.
+
+\begin{center}
+\begin{tabular}{ ||c|c|c|c|| } 
+ \hline
+ \textbf{Test File} & \textbf{Algorithm Solution} & \textbf{Optimal Solution} & \textbf{Ratio}\\[0.5ex]
+ \hline\hline
+ tsp\_example\_1.txt & 130,921 & 108,159 & 1.21 \\ 
+ \hline
+ tsp\_example\_2.txt & 3,115 & 2,579 & 1.21 \\ 
+ \hline
+ tsp\_example\_3.txt &  & 1,573,084 &  \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+While the greedy algorithm does run quickly and is easy to implement, there are some arrangments of cities which can make the nearest neighbor algorithm give the worst route. For example, it has been shown that "for every $n \geq 2$ there is an instance of ATSP (STSP) on n vertices for which [the greedy algorithm] finds the worst tour."~\cite{Gutin}
 
 \section*{Justifications}
+We chose  the nearest neighbor (greedy) algorithm because it is relatively easy to implement and still works quickly and efficiently. With an average solution of 20-25\% worse than the optimal solution, the algorithm also meets the requirments for this project. 
 
 \section*{Pseudocode}
-
 \newpage
-
 \begin{minted}[mathescape,
                linenos,
                numbersep=5pt,

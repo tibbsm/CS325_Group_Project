@@ -1,5 +1,6 @@
 import sys
 from math import sqrt
+from timeit import default_timer
 
 def d2(c1, c2):
 	return (c1['x'] - c2['x'])**2 + (c1['y'] - c2['y'])**2
@@ -61,7 +62,10 @@ def main():
 		city = {'id':int(spLine[0]), 'x':int(spLine[1]), 'y':int(spLine[2])}
 		cities.append(city)
 
+	start = default_timer()
 	tour, d = TSP_nearest_neighbor(cities)
+	end = default_timer()
+	print("Runtime: " + str(end-start) + " seconds.")
 	
 	outFile.write(str(d) + '\n')
 

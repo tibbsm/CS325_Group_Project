@@ -11,10 +11,13 @@
 \usepackage{graphicx}
 \usepackage{minted}
 \usepackage{subfiles}
+\usepackage[backend=biber,style=ieee]{biblatex}
 % !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
 
+\bibliography{sources}
+
 \title{The Traveling Salesman Problem Group Project\\[.25cm] CS352 – Winter 2018\\[.5cm]Group 45}
-\author{Marc Tibbs, Brad Besserman, Michael Chan}
+\author{Brad Besserman, Michael Chan, Marc Tibbs}
 \date{Due Date: March 16, 2018}
 
 \begin{document}
@@ -33,5 +36,7 @@
 
 \subfile{template.tex}
 
+\newpage
+\printbibliography
 
 \end{document}
