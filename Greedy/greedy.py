@@ -72,8 +72,6 @@ def main():
 	for city in tour:
 		outFile.write(str(city['id']) + ' ' + str(city['x']) + ' ' + str(city['y']) + '\n')
 
-
-
 	inFile.close()
 	outFile.close()
 
