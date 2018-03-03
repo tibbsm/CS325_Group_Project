@@ -5,40 +5,39 @@ from timeit import default_timer
 def distance(c1, c2):
 	return int(round(sqrt(abs((c1['x'] - c2['x'])**2 + (c1['y'] - c2['y'])**2))))
 
-def route_distance(route):
-	dist = 0
-	prev = route[-1]
-	for node in route:
-		dist += distance(node, prev)
-		prev = node
-	return dist
+def tour_distance(cities):
+	distance = 0
+	previous = cities[-1]
+	for city in cities:
+		distance += distance(city, previous)
+		previous = city
+	return distance
 
-def swap_2opt(route, i, k):
-	new_route = route[0:i]
-	new_route.extend(reversed(route[i:k + 1]))
-	new_route.extend(route[k+1:])
-	return new_route
+def swap(cities, i, j):
+	alt_tour = cities[0:i]
+	alt_tour.extend(reversed(cities[i:j + 1]))
+	alt_tour.extend(cities[j+1:])
+	return alt_tour
 
-
-def run_2opt(route):
+def run_2opt(cities):
 	improvement = True
-	best_route = route
-	best_distance = route_distance(route)
+	best_tour = cities
+	best_distance = tour_distance(cities)
 	
 	while improvement: 
 		improvement = False
-		for i in range(len(best_route) - 1):
-			for k in range(i+1, len(best_route)):
-				new_route = swap_2opt(best_route, i, k)
-				new_distance = route_distance(new_route)
-				if new_distance < best_distance:
-					best_distance = new_distance
-					best_route = new_route
+		for i in range(len(best_tour) - 1):
+			for j in range(i+1, len(best_tour)):
+				alt_tour = swap(best_tour, i, j)
+				alt_distance = tour_distance(alt_tour)
+				if alt_distance < best_distance:
+					best_distance = alt_distance
+					best_tour = alt_tour
 					improvement = True
-					break #improvement found, return to the top of the while loop
+					break
 			if improvement:
 				break
-	return best_route, best_distance
+	return best_tour, best_distance
 
 def main():
 	try:

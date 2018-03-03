@@ -2,24 +2,24 @@ import sys
 from math import sqrt
 from timeit import default_timer
 
-def d2(c1, c2):
+def distance_squared(c1, c2):
 	return (c1['x'] - c2['x'])**2 + (c1['y'] - c2['y'])**2
 
-def get_nn(cities, city):
-
+def nearest_neighbor(cities, city):
 	neighbors = {}
 
 	for neighbor in cities:
-		neighbors[d2(city, neighbor)] = neighbor
+		neighbors[distance_squared(city, neighbor)] = neighbor
 
 	nn = neighbors[min(neighbors)]
 	d = int(round(sqrt(min(neighbors))))
 
 	return nn, d
 
-def TSP_nearest_neighbor(cities):
+def TSP_NN(cities):
+	start = default_timer()
 	tour = []
-	dMin = sys.maxint
+	best_distance = sys.maxint
 
 	for first in cities:
 		total = 0
@@ -31,18 +31,21 @@ def TSP_nearest_neighbor(cities):
 				unvisited.append(city)
 
 		while len(unvisited) > 0:
-			nn, d = get_nn(unvisited, visited[-1])
+			nn, d = nearest_neighbor(unvisited, visited[-1])
 			visited.append(nn)
 			unvisited.remove(nn)
-			total += d	
+			total += d
 
-		total += int(round(sqrt(d2(visited[0], visited[-1]))))
+		total += int(round(sqrt(distance_squared(visited[0], visited[-1]))))
 
-		if total < dMin:
+		if total < best_distance:
 			tour = visited
-			dMin = total
+			best_distance = total
 
-	return tour, dMin
+		if ((default_timer() - start) >= 10):
+			return tour, best_distance
+
+	return tour, best_distance
 
 def main():
 
@@ -63,7 +66,7 @@ def main():
 		cities.append(city)
 
 	start = default_timer()
-	tour, d = TSP_nearest_neighbor(cities)
+	tour, d = TSP_NN(cities)
 	end = default_timer()
 	print("Runtime: " + str(end-start) + " seconds.")
 	
