@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 #include <string>
+#include <limits.h>
 
 struct city {
     int id, x, y;
